@@ -1,0 +1,80 @@
+:root {
+    --clr-primary: #d7e3fc;
+    --clr-light: #e2eafc;
+    --clr-dark: #333;
+    --clr-dark-blue: #6382cd;
+    --clr-white: #ffffff;
+}
+
+body {
+    margin: 0;
+    font-weight: 300;
+    font-size: 1.5rem;
+    background-color: var(--clr-primary);
+    color: var(--clr-dark-blue);
+}
+
+.title {
+    font-size: calc(3vw + 2rem);
+    font-weight: 900;
+    color: var(--clr-dark-blue);
+    letter-spacing: 3px;
+    margin: 0.25em 0 0.5em;
+}
+
+hr {
+    margin: 1em auto;
+    width: 80%;
+}
+
+.todo-form {
+    color: var(--clr-dark-blue);
+    padding: 1rem 2rem;
+    font-size: 1.1rem !important;
+    background: var(--clr-light);
+    border-radius: 30px;
+}
+
+
+label {
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+table {
+    text-align: center;
+    /* color: #6382cd !important; */
+}
+
+.btn.create {
+    margin: 1em 0.5em !important;
+    background-color: var(--clr-dark-blue);
+    color: var(--clr-light);
+}
+
+.btn.delete {
+    margin-right: 0.5rem;
+    background-color: var(--clr-dark);
+    color: var(--clr-light);
+}
+
+.btn.search {
+    margin: 0 0.5em !important;
+    background-color: var(--clr-dark-blue);
+    color: var(--clr-light);
+    float: right;
+}
+
+@media (max-width: 1400px) {
+    .container-fluid {
+        width: 50%;
+    }
+
+    .todo-form {
+        flex-direction: column;
+    }
+
+    .btn.create {
+        padding: 0.5em 1em;
+    }
+}
