@@ -2,32 +2,34 @@
   <div class="container">
     <h1>Baza Filmów</h1>
     <SearchInputVue/>
-  <!-- <TableMoviesVue/> -->
-  <!-- <TableMovies :fullJsonData="fullMoviesData"/> -->
-    <JustTable :fullJsonData="fullMoviesData"/>
-    <ListaFilmow/>
+  <TableMovies 
+  :movies="fullMoviesData"/>
+    <!-- <ListaFilmow :movies="fullMoviesData"/> -->
+    <GenreList :movies="fullMoviesData"/>
+    <!-- <GenreListVue/> -->
   </div>
-
-
 </template>
 
 <script>
-import ListaFilmow from './components/ListaFilmow.vue'
+import GenreList from './components/list/GenreList.vue';
+// import ListaFilmow from './components/ListaFilmow.vue'
 import SearchInputVue from './components/SearchInput.vue';
-// import TableMovies from './components/TableMovies.vue';
-import JustTable from './components/JustTable.vue'
+import TableMovies from './components/TableMovies.vue';
 import moviesjson from "./movies.json";
+// import GenreListVue from './components/list/GenreList.vue';
+// import _ from "lodash";
 
 export default {
   name: 'App',
   components: {
-    ListaFilmow,
+    // ListaFilmow,
     SearchInputVue,
-    JustTable
-    // TableMovies
+    TableMovies,
+    GenreList
 },
 data() {
       return {
+        // filteredJsonData: _.cloneDeep(this.fullJsonData),
         fullMoviesData: moviesjson
       }
     }

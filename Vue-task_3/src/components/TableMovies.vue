@@ -1,5 +1,5 @@
 <template>
-    <div>
+  <div>
     <table>
       <thead>
         <tr>
@@ -18,21 +18,20 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(index, it) in tableSize" :key="it">
-          <td id="title">{{movies[it].title}}</td>
-          <td id="year">{{movies[it].year}}</td>
-          <td id="cast">{{movies[it].cast.toString().split(",").join("\n")}}</td>
-          <td id="genres">{{movies[it].genres.toString().split(",").join("\n")}}</td>
+        <tr v-for="index in tableSize" :key="index">
+          <td id="title">{{movies[index].title}}</td>
+          <td id="year">{{movies[index].year}}</td>
+          <td id="cast">{{movies[index].cast.toString().split(",").join("\n")}}</td>
+          <td id="genres">{{movies[index].genres.toString().split(",").join("\n")}}</td>
         </tr>
-
       </tbody>
-      </table>
-      <div v-if="isButtonVisible">
-      <button class="btn btn-dark btn-block " v-on:click="expandTable()">
-        Wyświetl więcej
-      </button>
-      </div>
+    </table>
+    <div v-if="isButtonVisible">
+    <button class="btn btn-info btn-block " v-on:click="expandTable()">
+      Wyświetl więcej
+    </button>
     </div>
+  </div>
 </template>
 
 <script>
@@ -80,7 +79,6 @@ export default {
 <style scoped>
   td {
     padding: 0.5rem !important;
-    /* text-align: center; */
   }
   #year, #genres, #cast {
     text-align: center;
