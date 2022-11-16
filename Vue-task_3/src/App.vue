@@ -11,12 +11,12 @@
 </template>
 
 <script>
-import GenreList from './components/list/GenreList.vue';
+import GenreList from './components/GenreList.vue';
 // import ListaFilmow from './components/ListaFilmow.vue'
 import SearchInputVue from './components/SearchInput.vue';
 import TableMovies from './components/TableMovies.vue';
 import moviesjson from "./movies.json";
-import CastList from './components/list/CastList.vue';
+import CastList from './components/CastList.vue';
 // import _ from "lodash";
 
 export default {
