@@ -27,7 +27,7 @@
       </tbody>
     </table>
     <div v-if="isButtonVisible">
-    <button class="btn btn-info btn-block " v-on:click="expandTable()">
+    <button class="btn btn-dark btn-block " v-on:click="expandTable()">
       Wyświetl więcej
     </button>
     </div>

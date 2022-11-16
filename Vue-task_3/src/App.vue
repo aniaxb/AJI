@@ -2,11 +2,11 @@
   <div class="container">
     <h1>Baza Filmów</h1>
     <SearchInputVue/>
-  <TableMovies 
-  :movies="fullMoviesData"/>
+  <TableMovies :movies="fullMoviesData"/>
     <!-- <ListaFilmow :movies="fullMoviesData"/> -->
     <GenreList :movies="fullMoviesData"/>
-    <!-- <GenreListVue/> -->
+    <CastList :movies="fullMoviesData"/>
+    
   </div>
 </template>
 
@@ -16,7 +16,7 @@ import GenreList from './components/list/GenreList.vue';
 import SearchInputVue from './components/SearchInput.vue';
 import TableMovies from './components/TableMovies.vue';
 import moviesjson from "./movies.json";
-// import GenreListVue from './components/list/GenreList.vue';
+import CastList from './components/list/CastList.vue';
 // import _ from "lodash";
 
 export default {
@@ -25,7 +25,8 @@ export default {
     // ListaFilmow,
     SearchInputVue,
     TableMovies,
-    GenreList
+    GenreList,
+    CastList
 },
 data() {
       return {
