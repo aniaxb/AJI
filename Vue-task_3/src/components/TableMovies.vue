@@ -1,6 +1,6 @@
 <template>
-  
-  <SearchInput @set-data="filterTable"/>
+
+  <SearchInput @filter-data="filterTable"/>
 
   <div>
     <table>
@@ -16,8 +16,8 @@
         <tr v-for="movie in getMovies()" :key="movie">
           <td id="title">{{movie.title}}</td>
           <td id="year">{{movie.year}}</td>
-          <td id="cast">{{movie.cast.toString().split(",").join("\n")}}</td>
-          <td id="genres">{{movie.genres.toString().split(",").join("\n")}}</td>
+          <td id="cast">{{movie.cast.toString().split(", ").join("\n")}}</td>
+          <td id="genres">{{movie.genres.toString().split(", ").join("\n")}}</td>
         </tr>
       </tbody>
     </table>
@@ -80,7 +80,9 @@ filterTable(titleInput, startYearInput, endYearInput, castInput) {
 
   let includedTitle = function() {return true};
   let includedCast = function() {return true};
-  let includedYear = function() {return true};
+  let includedYearStart = function() {return true};
+  let includedYearEnd = function() {return true};
+  let includedYearBetween = function() {return true};
 
   if(titleInput === "" && startYearInput === "" && endYearInput === "" && castInput === "") {
     return
@@ -93,17 +95,17 @@ filterTable(titleInput, startYearInput, endYearInput, castInput) {
   }
 
   else if(startYearInput !== "" && endYearInput === ""){
-    includedYear = function name(startYear, movie) {
+    includedYearStart = function name(startYear, movie) {
       return movie['year'] >= startYear
     }
   }
   else if(endYearInput !== "" && startYearInput === ""){
-    includedYear = function name(endYear, movie) {
+    includedYearEnd = function name(endYear, movie) {
       return movie['year'] >= endYear
     }
   }
    else if(startYearInput !== "" && endYearInput !== "" && startYearInput < endYearInput) {
-    includedYear = function name(startYear, endYear, movie) {
+    includedYearBetween = function name(startYear, endYear, movie) {
       return movie['year'] >= startYear && movie['year'] <= endYear
     }
   }
@@ -118,7 +120,7 @@ filterTable(titleInput, startYearInput, endYearInput, castInput) {
 else return
 
   this.movies = _.filter(this.moviesTable, movie => {
-  return includedTitle(titleInput, movie) && includedCast(castInput, movie) && includedYear(startYearInput, endYearInput, movie)
+  return includedTitle(titleInput, movie) && includedCast(castInput, movie) && includedYearStart(startYearInput, movie) && includedYearEnd( endYearInput, movie) && includedYearBetween(startYearInput, endYearInput, movie)
   });
 
 }

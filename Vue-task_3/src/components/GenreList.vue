@@ -2,10 +2,10 @@
     <div>
         <h2>Filmy wg gatunku</h2>
         <div v-for="(item, index) in genreList" :key="index">
-            <p>{{item}}</p>
-            <ol type="1">
-                <li class="list-group" v-for="(item, index) in titleList[index]" :key="index">
-                    {{item.title}}
+            <p >{{item}}</p>
+            <ol type="1" >
+                <li v-for="(item, index) in titleList[index]" :key="index">
+                    {{ item.title}}
                 </li>
             </ol>
         </div>
@@ -18,8 +18,8 @@ import _ from 'lodash';
 
     const startGenreList = 0;
     const endGenreList = 150;
-    const startTitleList = 1000;
-    const endTitleList = 1200;
+    const startTitleList = 0;
+    const endTitleList = 101;
 
 export default {
     name: "GenreList",
@@ -43,6 +43,18 @@ export default {
       }
 
     },
+
+    methods: {
+        isNotEmptyList: function(list){
+            let count = 0;
+            for(let i=0; i< list.length; i++){
+                count++;
+            }
+            if(count === 0) return false;
+            else return true
+        },
+        
+    }
 }
 </script>
 

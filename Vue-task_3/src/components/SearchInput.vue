@@ -26,7 +26,7 @@
             <input class="form-control" type="text" v-model="cast" id="cast" placeholder="Imię i nazwisko">
         </div>
         <div class="form-group row">
-            <input type="button" v-on:click="$emit('set-data', this.title, this.startYear, this.endYear, this.cast)" class="btn btn-info col-sm-12" value="Szukaj"/>
+            <input type="button" v-on:click="$emit('filter-data', this.title, this.startYear, this.endYear, this.cast)" class="btn btn-info col-sm-12" value="Szukaj"/>
         </div>
    </form>
         
@@ -36,7 +36,7 @@
 export default{
 
     name: "SearchInput",
-    emits: ['set-data'],
+    emits: ['filter-data'],
 
     data() {
         return {

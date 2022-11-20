@@ -1,11 +1,11 @@
 <template>
     <div>
         <h2>Filmy wg obsady</h2>
-        <div  v-for="(item, index) in castList" :key="index">
+        <div v-for="(item, index) in castList" :key="index">
             <p>{{item}}</p>
   
             <ol type="1">
-                <li class="list-group" v-for="(item, index) in titleList[index]" :key="index">
+                <li v-for="(item, index) in titleList[index]" :key="index">
                 {{item.title}}
                 </li>
             </ol>
@@ -18,8 +18,8 @@
   
     const startCastList = 0;
     const endCastList = 100;
-    const startTitleList = 1000;
-    const endTitleList = 1100;
+    const startTitleList = 0;
+    const endTitleList = 101;
   
     export default {
       name: "CastMovieList",
@@ -29,12 +29,11 @@
       },
   
       data() {
-        let isEmpty = false;
+
         return {
           castList: _.slice(_.uniq(_.flatten(_.filter(
             _.map(this.movies, "cast"), _.size))), startCastList, endCastList),
           titleList: [],
-          isEmpty
         }
       },
   
@@ -44,7 +43,10 @@
             this.movies.slice(startTitleList, endTitleList), (m) => _.includes(_.flatten(m.cast), item)))
         }
       },
-  
+      
+      methods: {
+      
+      }
     }
   </script>
   
