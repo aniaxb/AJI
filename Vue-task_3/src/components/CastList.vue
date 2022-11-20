@@ -16,10 +16,10 @@
   <script>
     import _ from "lodash";
   
-    const BEGIN_CAST = 0;
-    const END_CAST = 149;
-    const BEGIN_TITLE = 1000;
-    const END_TITLE = 1299;
+    const startCastList = 0;
+    const endCastList = 100;
+    const startTitleList = 1000;
+    const endTitleList = 1100;
   
     export default {
       name: "CastMovieList",
@@ -29,17 +29,19 @@
       },
   
       data() {
+        let isEmpty = false;
         return {
           castList: _.slice(_.uniq(_.flatten(_.filter(
-            _.map(this.movies, "cast"), _.size))), BEGIN_CAST, END_CAST),
+            _.map(this.movies, "cast"), _.size))), startCastList, endCastList),
           titleList: [],
+          isEmpty
         }
       },
   
       mounted() {
-        for (let it of this.castList) {
+        for (let item of this.castList) {
           this.titleList.push(_.filter(
-            this.movies.slice(BEGIN_TITLE, END_TITLE), (o) => _.includes(_.flatten(o.cast), it)))
+            this.movies.slice(startTitleList, endTitleList), (m) => _.includes(_.flatten(m.cast), item)))
         }
       },
   

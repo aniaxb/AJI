@@ -1,78 +1,130 @@
 <template>
+  
+  <SearchInput @set-data="filterTable"/>
+
   <div>
     <table>
       <thead>
         <tr>
-          <th>
-            Title
-          </th> 
-          <th>
-            Production Year
-          </th>
-          <th>
-            Cast
-          </th> 
-          <th>
-            Genres
-          </th>
+          <th>Title</th> 
+          <th>Production Year</th>
+          <th>Cast</th> 
+          <th>Genres</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="index in tableSize" :key="index">
-          <td id="title">{{movies[index].title}}</td>
-          <td id="year">{{movies[index].year}}</td>
-          <td id="cast">{{movies[index].cast.toString().split(",").join("\n")}}</td>
-          <td id="genres">{{movies[index].genres.toString().split(",").join("\n")}}</td>
+        <tr v-for="movie in getMovies()" :key="movie">
+          <td id="title">{{movie.title}}</td>
+          <td id="year">{{movie.year}}</td>
+          <td id="cast">{{movie.cast.toString().split(",").join("\n")}}</td>
+          <td id="genres">{{movie.genres.toString().split(",").join("\n")}}</td>
         </tr>
       </tbody>
     </table>
-    <div v-if="isButtonVisible">
-    <button class="btn btn-dark btn-block " v-on:click="expandTable()">
-      Wyświetl więcej
-    </button>
+    <div>
+      <button v-if="isButtonVisible" class="btn btn-dark btn-block " v-on:click="expandTable">
+        Wyświetl więcej
+      </button>
     </div>
   </div>
 </template>
 
 <script>
- const INITIAL_TABLE_SIZE = 10;
+import SearchInput from './SearchInput.vue';
+import _ from "lodash";
 
 export default {
-  name: 'TableMovies',
-
-  props: {
-      movies: Array,
+    name: "TableMovies",
+    components: { 
+      SearchInput 
+    }, 
+    props: {
+        moviesTable: Object
     },
 
+    mounted() {
+      this.movies = this.moviesTable
+    },
+    
     data() {
-      let tableSize = INITIAL_TABLE_SIZE;
       let isButtonVisible = true;
-
-      if (this.movies.length < INITIAL_TABLE_SIZE) {
-        tableSize = this.movies.length;
-        isButtonVisible = false;
-      } else {
-        tableSize = INITIAL_TABLE_SIZE;
-        isButtonVisible = true;
-      }
-
-      return {
-        tableSize,
-        isButtonVisible
-      }
-    },
-
-  methods: {
-      expandTable: function () {
-        if (this.movies.length + INITIAL_TABLE_SIZE <= this.tableSize) {
-          this.tableSize = this.jsonData.length;
-          this.isButtonVisible = false;
-        } else {
-          this.tableSize += INITIAL_TABLE_SIZE;
-          this.isButtonVisible = true;
-        }
-      }
+    return {
+      movies: [],
+      tableSize: 10,
+      expandBy: 10,
+      isButtonVisible
     }
+  },
+
+    methods: {
+
+getMovies() {
+  return this.movies.slice(0 ,this.tableSize);
+},
+
+expandTable() {
+  if(this.movies.length + this.expandBy <= this.tableSize){
+    this.tableSize = this.movies.length;
+    this.isButtonVisible = false;
+  }
+  else {
+    this.tableSize += this.expandBy;
+    this.isButtonVisible = true;
+  }
+  
+},
+
+filterTable(titleInput, startYearInput, endYearInput, castInput) {
+
+  this.movies = this.moviesTable;
+
+  let includedTitle = function() {return true};
+  let includedCast = function() {return true};
+  let includedYear = function() {return true};
+
+  if(titleInput === "" && startYearInput === "" && endYearInput === "" && castInput === "") {
+    return
+  }
+
+  if(titleInput !== ""){
+    includedTitle = function name(filter, movie) {
+      return movie['title'].toLowerCase().includes(filter.toLowerCase())
+    }
+  }
+
+  else if(startYearInput !== "" && endYearInput === ""){
+    includedYear = function name(startYear, movie) {
+      return movie['year'] >= startYear
+    }
+  }
+  else if(endYearInput !== "" && startYearInput === ""){
+    includedYear = function name(endYear, movie) {
+      return movie['year'] >= endYear
+    }
+  }
+   else if(startYearInput !== "" && endYearInput !== "" && startYearInput < endYearInput) {
+    includedYear = function name(startYear, endYear, movie) {
+      return movie['year'] >= startYear && movie['year'] <= endYear
+    }
+  }
+    
+  else if(castInput !== ""){
+    includedCast = function name(filter, movie) {
+      return _.find(movie['cast'], cast => {
+        return cast.toLowerCase().includes(filter.toLowerCase())
+      })
+  }
+}  
+else return
+
+  this.movies = _.filter(this.moviesTable, movie => {
+  return includedTitle(titleInput, movie) && includedCast(castInput, movie) && includedYear(startYearInput, endYearInput, movie)
+  });
+
+}
+
+}
+
 }
 </script>
 
