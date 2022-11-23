@@ -22,7 +22,7 @@
       </tbody>
     </table>
     <div>
-      <button v-if="isButtonVisible" class="btn btn-dark btn-block " v-on:click="expandTable">
+      <button v-if="showButton" class="btn btn-dark btn-block " v-on:click="expandTable">
         Wyświetl więcej
       </button>
     </div>
@@ -47,12 +47,12 @@ export default {
     },
     
     data() {
-      let isButtonVisible = true;
-    return {
-      movies: [],
-      tableSize: 10,
-      expandBy: 10,
-      isButtonVisible
+      let showButton = true;
+      return {
+        movies: [],
+        tableSize: 10,
+        expandBy: 10,
+        showButton
     }
   },
 
@@ -65,11 +65,11 @@ getMovies() {
 expandTable() {
   if(this.movies.length + this.expandBy <= this.tableSize){
     this.tableSize = this.movies.length;
-    this.isButtonVisible = false;
+    this.showButton = false;
   }
   else {
     this.tableSize += this.expandBy;
-    this.isButtonVisible = true;
+    this.showButton = true;
   }
   
 },
@@ -89,29 +89,29 @@ filterTable(titleInput, startYearInput, endYearInput, castInput) {
   }
 
   if(titleInput !== ""){
-    includedTitle = function name(filter, movie) {
+    includedTitle = function(filter, movie) {
       return movie['title'].toLowerCase().includes(filter.toLowerCase())
     }
   }
 
   else if(startYearInput !== "" && endYearInput === ""){
-    includedYearStart = function name(startYear, movie) {
+    includedYearStart = function(startYear, movie) {
       return movie['year'] >= startYear
     }
   }
   else if(endYearInput !== "" && startYearInput === ""){
-    includedYearEnd = function name(endYear, movie) {
-      return movie['year'] >= endYear
+    includedYearEnd = function(endYear, movie) {
+      return movie['year'] <= endYear
     }
   }
    else if(startYearInput !== "" && endYearInput !== "" && startYearInput < endYearInput) {
-    includedYearBetween = function name(startYear, endYear, movie) {
+    includedYearBetween = function(startYear, endYear, movie) {
       return movie['year'] >= startYear && movie['year'] <= endYear
     }
   }
     
   else if(castInput !== ""){
-    includedCast = function name(filter, movie) {
+    includedCast = function(filter, movie) {
       return _.find(movie['cast'], cast => {
         return cast.toLowerCase().includes(filter.toLowerCase())
       })

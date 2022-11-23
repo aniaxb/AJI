@@ -3,7 +3,6 @@
         <h2>Filmy wg obsady</h2>
         <div v-for="(item, index) in castList" :key="index">
             <p>{{item}}</p>
-  
             <ol type="1">
                 <li v-for="(item, index) in titleList[index]" :key="index">
                 {{item.title}}
@@ -17,7 +16,7 @@
     import _ from "lodash";
   
     const startCastList = 0;
-    const endCastList = 100;
+    const endCastList = 101;
     const startTitleList = 0;
     const endTitleList = 101;
   

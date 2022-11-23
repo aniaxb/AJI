@@ -5,7 +5,7 @@
             <p >{{item}}</p>
             <ol type="1" >
                 <li v-for="(item, index) in titleList[index]" :key="index">
-                    {{ item.title}}
+                    {{item.title}}
                 </li>
             </ol>
         </div>
@@ -44,17 +44,6 @@ export default {
 
     },
 
-    methods: {
-        isNotEmptyList: function(list){
-            let count = 0;
-            for(let i=0; i< list.length; i++){
-                count++;
-            }
-            if(count === 0) return false;
-            else return true
-        },
-        
-    }
 }
 </script>
 
