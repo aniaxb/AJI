@@ -17,7 +17,7 @@
 import _ from 'lodash';
 
     const startGenreList = 0;
-    const endGenreList = 150;
+    const endGenreList = 101;
     const startTitleList = 0;
     const endTitleList = 101;
 

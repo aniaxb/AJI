@@ -22,7 +22,8 @@
       </tbody>
     </table>
     <div>
-      <button v-if="showButton" class="btn btn-dark btn-block " v-on:click="expandTable">
+      <button  class="btn btn-dark btn-block " v-on:click="expandTable">
+        <!-- v-if="showButton" -->
         Wyświetl więcej
       </button>
     </div>
@@ -47,12 +48,12 @@ export default {
     },
     
     data() {
-      let showButton = true;
+      // let showButton = true;
       return {
         movies: [],
         tableSize: 10,
         expandBy: 10,
-        showButton
+        // showButton
     }
   },
 
@@ -65,11 +66,11 @@ getMovies() {
 expandTable() {
   if(this.movies.length + this.expandBy <= this.tableSize){
     this.tableSize = this.movies.length;
-    this.showButton = false;
+    // this.showButton = false;
   }
   else {
     this.tableSize += this.expandBy;
-    this.showButton = true;
+    // this.showButton = true;
   }
   
 },
