@@ -1,4 +1,14 @@
-# hello-world
+# Movie Base Application for a subject in college called AJI - "Aplikacje w językach interpretowanych". <br />
+The purpose of the application was to display a list of movies from json file and to enable filtering the movies. <br />
+<br />
+Framework: Vue.js<br />
+Library for filtering: Lodash<br />
+<br />
+
+|    Authors              |
+| ----------------------- |
+| Ania Banachowicz        |
+| Damian Biskupski        |
 
 ## Project setup
 ```
